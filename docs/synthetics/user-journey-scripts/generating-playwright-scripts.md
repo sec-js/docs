@@ -5,6 +5,10 @@ Generative AI tools such as ChatGPT and Claude are getting better and better at 
 
 >We wrote a guide that shows how to do it step by step using Chrome and ChatGPT: [How to Create Playwright Scripts for Website Monitoring with Chrome, ChatGPT](https://sematext.com/blog/how-to-create-playwright-scripts-for-website-monitoring-with-chrome-chatgpt-sematext/)
 
+## Playwright MCP Server
+
+You can use the [Playwright MCP server](https://playwright.dev/docs/getting-started-mcp) to help you write User Journey Scripts through the Model Context Protocol. This MCP server enables LLMs to interact with web pages using structured accessibility snapshots. It works with VS Code, Cursor, Windsurf, Claude Desktop, and any other MCP client.
+
 ## Prompting generative AI to create Playwright scripts
 
 Take a look at the following example that uses ChatGPT.

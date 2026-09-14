@@ -1,9 +1,9 @@
 title: OpenTelemetry Support in Sematext Agent
-description: Complete guide to configuring the Sematext Agent for OpenTelemetry tracing support
+description: Complete guide to configuring the Sematext Agent for OpenTelemetry traces, metrics, and logs support
 
 ## OpenTelemetry Support
 
-The Sematext Agent includes built-in OpenTelemetry support, acting as a local collector that receives traces from your applications and forwards them to Sematext Cloud. This architecture provides secure, reliable trace collection with minimal application overhead.
+The Sematext Agent includes built-in OpenTelemetry support, acting as a local collector that receives traces, metrics, or logs (collectively referred to as "telemetry" hereafter) from your applications and forwards them to Sematext Cloud. This architecture provides secure, reliable telemetry collection with minimal application overhead.
 
 OpenTelemetry support is available starting from version [3.10.0](https://sematext.com/docs/agents/sematext-agent/releasenotes/#version-3100).
 
@@ -13,7 +13,7 @@ OpenTelemetry support is available starting from version [3.10.0](https://semate
 !!! tip "Using an AI coding agent?"
     Load the [sematext-otel skill](/docs/guide/ai-powered-otel-onboarding/) into [Claude Code](https://docs.claude.com/en/docs/claude-code) (or any agent that can read a markdown URL) and it will walk you through both the agent-based flow described here and the managed-OTLP-endpoint alternative, producing the exact env-var block for your language and deployment.
 
-> **Note**: While this guide focuses on tracing configuration, the agent also supports OpenTelemetry metrics and logs, with full documentation for those coming soon.
+> **Note**: While this guide focuses on tracing configuration, the agent also supports OpenTelemetry metrics and logs.
 
 ## Architecture Overview
 
@@ -23,10 +23,10 @@ Your Application → OpenTelemetry SDK → Sematext Agent → Sematext Cloud
 
 The Sematext Agent provides:
 
-- **OTLP Receiver**: Accepts traces via gRPC and HTTP protocols
-- **Token Management**: Routes traces to appropriate Sematext applications using token groups
+- **OTLP Receiver**: Accepts telemetry via gRPC and HTTP protocols
+- **Token Management**: Routes telemetry to appropriate Sematext applications using token groups
 - **Service Mapping**: Matches application service names to configured token groups
-- **Reliability**: Buffering and retry logic for trace delivery
+- **Reliability**: Buffering and retry logic for telemetry delivery
 - **Security**: Secure communication to Sematext Cloud
 
 ## OpenTelemetry Ports for Tracing
@@ -37,8 +37,12 @@ The agent exposes these default ports for OpenTelemetry traces:
 |----------|------|----------|---------|
 | **HTTP** (Recommended) | 4338 | `http://localhost:4338` | Trace collection |
 | **gRPC** | 4337 | `http://localhost:4337` | Trace collection |
+| **HTTP** (Recommended) | 4318 | `http://localhost:4338` | Metrics collection |
+| **gRPC** | 4317 | `http://localhost:4337` | Metrics collection |
+| **HTTP** (Recommended) | 4328 | `http://localhost:4338` | Logs collection |
+| **gRPC** | 4327 | `http://localhost:4337` | Logs collection |
 
-> **Note**: The agent also supports OpenTelemetry metrics (ports 4317/4318) and logs (ports 4327/4328), but this guide focuses on tracing configuration.
+> **Note**: The agent supports OpenTelemetry metrics, logs, and traces, but this guide focuses on tracing configuration.
 
 ## Service Name Matching
 
@@ -53,7 +57,7 @@ const resource = new Resource({
 
 Then your agent configuration must include `frontend` as a service name.
 
-The agent routes trace data based on **service names** organized into **token groups**:
+The agent routes telemetry data based on **service names** organized into **token groups**:
 
 ```yaml
 # Service-to-group mapping
@@ -73,7 +77,7 @@ token-groups:
     monitoring-token: "db-monitoring-token"
 ```
 
-## Trace Flow
+## Traces Flow
 
 1. Application sends traces → `sematext-agent:4337/4338` 
 2. Agent matches service name → Looks up appropriate traces token for that service
@@ -83,7 +87,7 @@ token-groups:
 
 ### Linux/Windows
 
-Use the `st-agent otel` command to manage OpenTelemetry settings for tracing.
+Use the `st-agent otel` command to manage OpenTelemetry settings.
 
 ##### 1. Enable OpenTelemetry Tracing
 

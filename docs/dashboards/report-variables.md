@@ -59,7 +59,7 @@ Sematext already includes a number of predefined Report Variables across our Mon
 
 ### Tag Variables
 
-Tag Variables appear in the dashboar or report’s Filters as predefined filters.
+Tag Variables appear in the dashboard or report’s Filters as predefined filters.
 
 ![Report Variables Filter](/docs/images/dashboards/report-variables-filter.png)
 

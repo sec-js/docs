@@ -1,7 +1,7 @@
 title: AI Agent Watch
 description: An overview of AI Agent Watch, Sematext's monitoring solution for AI agent activity running on your hosts
 
-AI agents - coding assistants, autonomous scripts, agentic workflows - increasingly run directly on your infrastructure with real permissions: they execute shell commands, read and write files, and talk to external services on your behalf. AI Agent Watch gives you visibility into what those agents are actually doing on a host, so you can catch risky behavior - credential access, connections to unexpected destinations, PII leaving your systems - before it becomes an incident.
+AI agents - coding assistants, autonomous scripts, agentic workflows - increasingly run directly on your infrastructure with real permissions: they execute shell commands, read and write files, and talk to external services on your behalf. [AI Agent Watch](https://sematext.com/docs/ai-agent-watch/) gives you visibility into what those agents are actually doing on a host, so you can catch risky behavior - credential access, connections to unexpected destinations, PII leaving your systems - before it becomes an incident.
 
 AI Agent Watch runs alongside your AI agent processes and reports on their activity: when a session starts and ends, which tools/commands it executes, which files it reads, writes, or renames, which hosts it connects to, and whether any outbound data matches a PII pattern you care about. Each event is automatically compared against your alert rules, given a priority and a risk score, and rolled up into an overall risk score for the session.
 
